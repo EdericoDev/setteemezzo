@@ -99,8 +99,8 @@ int main() {
     int fichesGiocatore = 100; 
     int fichesMazziere = 1000; 
     
-    const float valoreFichesInfrasettimanale = 0.5; // Le fiches valgono 0.50 euro se è un giorno infrasettimanale
-    const float valoreFichesWeekend = 0.7; // Le fiches valgono 0.70 euro se è un giorno infrasettimanale
+    const float valoreFichesInfrasettimanale = 0.5; // Le fiches valgono 0.50 euro se Ã¨ un giorno infrasettimanale
+    const float valoreFichesWeekend = 0.7; // Le fiches valgono 0.70 euro se Ã¨ un weekend
     const float tassaPercentuale = 8.0; // tassa che si prende il casino 
     
     int giornoDellaSettimana;
@@ -137,7 +137,7 @@ int main() {
         cout << "Fiches attuali del mazziere: " << fichesMazziere << "\n";
 
         if (fichesGiocatore <= 0) {
-            cout << "\nHai esaurito le fiches! Non puoi più giocare.\n";
+            cout << "\nHai esaurito le fiches! Non puoi piÃ¹ giocare.\n";
             break;
         }
 
@@ -211,7 +211,7 @@ int main() {
          cin >> giocaAncora;
          cout << "\n";
         } else {
-        cout << "Non è possibile giocare ancora, il mazziere e' a corto di fiches.\n";
+        cout << "Non Ã¨ possibile giocare ancora, il mazziere e' a corto di fiches.\n";
         break; 
         }
         
