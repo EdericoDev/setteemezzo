@@ -132,7 +132,7 @@ int main() {
 
     cout << ", quindi le fiches valgono " << valoreFichesInEuro << " euro!\n\n";
 
-    while (giocaAncora == 's' || giocaAncora == 'S') {
+    while (giocaAncora == 's') {
         cout << "Fiches attuali di " << nomeGiocatore << " : " << fichesGiocatore << "\n";
         cout << "Fiches attuali del mazziere: " << fichesMazziere << "\n";
 

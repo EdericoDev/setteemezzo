@@ -94,7 +94,7 @@ int main() {
         cout << "Inserisci il tuo nome: ";
         cin >> nomeGiocatore;
 
-    while (giocaAncora == 's' || giocaAncora == 'S') {
+    while (giocaAncora == 's') {
         
         float punteggioGiocatore = turnoGiocatore(nomeGiocatore);
 
@@ -112,7 +112,7 @@ int main() {
         } else if (punteggioGiocatore > 7.5) {
             cout << "\nHai perso! Il mazziere vince.\n";
         } else if (punteggioMazziere > 7.5) {
-            cout << "\nHai vinto! Il mazziere è fuori gioco.\n";
+            cout << "\nHai vinto! Il mazziere ï¿½ fuori gioco.\n";
         } else if (punteggioGiocatore > punteggioMazziere) {
             cout << "\nHai vinto! Complimenti!\n";
         } else if (punteggioGiocatore < punteggioMazziere) {
