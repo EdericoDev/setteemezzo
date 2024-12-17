@@ -4,7 +4,7 @@
 
 using namespace std;
 
-float estraiCarta() {
+float estrazioneCarta() {
     int valore = rand() % 10 + 1; 
     if (valore > 7) {
         return 0.5; 
@@ -20,7 +20,7 @@ float turnoGiocatore(const string& nome) {
     cout << "\nTurno di " << nome << ":\n";
 
     while (scelta == 's') { 
-        float carta = estraiCarta();
+        float carta = estrazioneCarta();
         cout << "Carta estratta: " << carta << endl;
         punteggio += carta;
         cout << "Punteggio attuale: " << punteggio << endl;
@@ -37,34 +37,34 @@ float turnoGiocatore(const string& nome) {
     return punteggio;
 }
 
-float turnoMazziere() {
+float turnoBanco() {
     float punteggio = 0.0;
 
-    cout << "\nTurno del mazziere:\n";
+    cout << "\nTurno del banco:\n";
 
     for (int i = 0; punteggio <= 7.5;) {
-        float carta = estraiCarta(); 
-        cout << "Carta estratta dal mazziere: " << carta << endl;
+        float carta = estrazioneCarta(); 
+        cout << "Carta estratta dal banco: " << carta << endl;
         punteggio += carta;
-        cout << "Punteggio attuale del mazziere: " << punteggio << endl;
+        cout << "Punteggio attuale del banco: " << punteggio << endl;
 
         if (punteggio > 7.5) {
-            cout << "Il mazziere e' fuori gioco!\n";
+            cout << "Il banco e' fuori gioco!\n";
             break;  
         }
         
         switch (int(punteggio)) {  
             case 1:
-                cout << "\nIl mazziere continua immediatamente!\n";
+                cout << "\nIl banco continua immediatamente!\n";
                 break;  
 
             case 2: 
             case 3:
             case 4:
                 if (punteggio < 5.0) {
-                    cout << "\nIl mazziere decide di continuare.\n";
+                    cout << "\nIl banco decide di continuare.\n";
                 } else {
-                    cout << "\nIl mazziere valuta il rischio e si ferma.\n";
+                    cout << "\nIl banco valuta il rischio e si ferma.\n";
                     return punteggio;  
                 }
                 break;
@@ -73,9 +73,9 @@ float turnoMazziere() {
             case 6:
             case 7:
                 if (punteggio < 6.5) {
-                    cout << "\nIl mazziere rischia e continua.\n";
+                    cout << "\nIl banco rischia e continua.\n";
                 } else {
-                    cout << "\nIl mazziere decide di fermarsi.\n";
+                    cout << "\nIl banco decide di fermarsi.\n";
                     return punteggio;  
                 }
                 break;
@@ -98,25 +98,25 @@ int main() {
         
         float punteggioGiocatore = turnoGiocatore(nomeGiocatore);
 
-        float punteggioMazziere = 0.0;
+        float punteggioBanco = 0.0;
         if (punteggioGiocatore <= 7.5) {
-            punteggioMazziere = turnoMazziere();
+            punteggioBanco = turnoBanco();
         }
 
         cout << "\nEcco i risultati! \n";
         cout << nomeGiocatore << ": " << punteggioGiocatore << endl;
-        cout << "Mazziere: " << punteggioMazziere << endl;
+        cout << "banco: " << punteggioBanco << endl;
 
-        if (punteggioGiocatore > 7.5 && punteggioMazziere > 7.5) {
+        if (punteggioGiocatore > 7.5 && punteggioBanco > 7.5) {
             cout << "\nEntrambi fuori gioco! Nessun vincitore.\n";
         } else if (punteggioGiocatore > 7.5) {
-            cout << "\nHai perso! Il mazziere vince.\n";
-        } else if (punteggioMazziere > 7.5) {
-            cout << "\nHai vinto! Il mazziere � fuori gioco.\n";
-        } else if (punteggioGiocatore > punteggioMazziere) {
+            cout << "\nHai perso! Il banco vince.\n";
+        } else if (punteggioBanco > 7.5) {
+            cout << "\nHai vinto! Il banco e' fuori gioco.\n";
+        } else if (punteggioGiocatore > punteggioBanco) {
             cout << "\nHai vinto! Complimenti!\n";
-        } else if (punteggioGiocatore < punteggioMazziere) {
-            cout << "\nHai perso! Il mazziere vince.\n";
+        } else if (punteggioGiocatore < punteggioBanco) {
+            cout << "\nHai perso! Il banco vince.\n";
         } else {
             cout << "\nPareggio! Nessun vincitore.\n";
         }
