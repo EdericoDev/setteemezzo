@@ -125,7 +125,7 @@ float turnoBanco(int sceltaJolly) {
                     int bonus = effettoCompitoInClasse(punteggio);
                     if (bonus > 0) {
                         cout << "Il banco ha guadagnato " << bonus << " fiches!\n";
-                        punteggio += bonus;
+                        fiches += bonus;
                     }
                 }
                 break;
