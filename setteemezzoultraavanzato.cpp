@@ -5,15 +5,15 @@
 using namespace std;
 
 float estrazioneCarta() {
-    int valore = rand() % 10 + 1; 
-    if (valore > 7) {
+    int carta = rand() % 10 + 1; 
+    if (carta > 7) {
         return 0.5; 
     } else {
-        return valore; 
+        return carta; 
     }
 }
 
-float turnoGiocatore(const string& nome) {
+float turnoGiocatore(string nome) {
     float punteggio = 0.0;
     char scelta = 's'; 
 
@@ -42,7 +42,7 @@ float turnoBanco() {
 
     cout << "\nTurno del banco:\n";
 
-    for (int i = 0; punteggio <= 7.5;) {
+    while (punteggio <= 7.5) {
         float carta = estrazioneCarta(); 
         cout << "Carta estratta dal banco: " << carta << endl;
         punteggio += carta;
@@ -85,10 +85,10 @@ float turnoBanco() {
     return punteggio;
 }
 
-bool eWeekend(int& giornoDellaSettimana) {
+bool eWeekend() {  
     time_t adesso = time(0);
     tm* orarioLocale = localtime(&adesso);
-    giornoDellaSettimana = orarioLocale->tm_wday; 
+    int giornoDellaSettimana = orarioLocale->tm_wday; 
     return (giornoDellaSettimana == 0 || giornoDellaSettimana == 6); // 0 corrisponde a domenica mentre 6 a sabato.
 }
 
@@ -99,12 +99,12 @@ int main() {
     int fichesGiocatore = 100; 
     int fichesBanco = 1000; 
     
-    const float valoreFichesInfrasettimanale = 0.5; // Le fiches valgono 0.50 euro se è un giorno infrasettimanale
-    const float valoreFichesWeekend = 0.7; // Le fiches valgono 0.70 euro se è un weekend
-    const float tassaPercentuale = 8.0; // tassa che si prende il casino 
+    float valoreFichesInfrasettimanale = 0.5; // Le fiches valgono 0.50 euro se è un giorno infrasettimanale
+    float valoreFichesWeekend = 0.7; // Le fiches valgono 0.70 euro se è un weekend
+    float tassaPercentuale = 8.0; // tassa che si prende il casino 
     
     int giornoDellaSettimana;
-    bool weekend = eWeekend(giornoDellaSettimana);
+    bool weekend = eWeekend();
     float valoreFichesInEuro;
     if (weekend) {
     valoreFichesInEuro = valoreFichesWeekend; 
@@ -136,16 +136,6 @@ int main() {
         cout << "Fiches attuali di " << nomeGiocatore << " : " << fichesGiocatore << "\n";
         cout << "Fiches attuali del banco: " << fichesBanco << "\n";
 
-        if (fichesGiocatore <= 0) {
-            cout << "\nHai esaurito le fiches! Non puoi più giocare.\n";
-            break;
-        }
-
-        if (fichesBanco <= 0) {
-            cout << "\nIl banco ha esaurito le fiches! Complimenti, hai vinto la partita.\n";
-            break;
-        }
-
         int scommessa = 0;
         cout << "Quante fiches vuoi scommettere? ";
         cin >> scommessa;
@@ -172,7 +162,8 @@ int main() {
 
         if (punteggioGiocatore > 7.5 && punteggioBanco > 7.5) {
          cout << "Entrambi fuori gioco! Nessun vincitore.\n";
-        } else if (punteggioGiocatore > 7.5) {
+        }
+        else if (punteggioGiocatore > 7.5) {
          cout << "Hai perso! Il banco vince.\n";
          fichesGiocatore -= scommessa;
          fichesBanco += scommessa;
@@ -180,21 +171,25 @@ int main() {
           cout << "Hai fatto all-in e hai perso! Esci dal gioco.\n";
           break; 
         }
-        } else if (punteggioBanco > 7.5) {
+        } 
+        else if (punteggioBanco > 7.5) {
          cout << "Hai vinto! Il banco e' fuori gioco.\n";
           if (allIn) {
           fichesGiocatore += scommessa * 3;
           fichesBanco -= scommessa * 3;
           cout << "All-in! Hai triplicato la vincita!\n";
-        } else {
+        } 
+        else {
         fichesGiocatore += scommessa;
         fichesBanco -= scommessa;
         }
-        } else if (punteggioGiocatore > punteggioBanco) {
+        }
+         else if (punteggioGiocatore > punteggioBanco) {
          cout << "Hai vinto! Complimenti!\n";
          fichesGiocatore += scommessa;
          fichesBanco -= scommessa;
-        } else if (punteggioGiocatore < punteggioBanco) {
+        }
+         else if (punteggioGiocatore < punteggioBanco) {
          cout << "Hai perso! Il banco vince.\n";
          fichesGiocatore -= scommessa;
          fichesBanco += scommessa;
@@ -202,17 +197,26 @@ int main() {
             cout << "Hai fatto all-in e hai perso! Esci dal gioco.\n";
             break; 
         }
-        } else {
+        }
+         else {
          cout << "Pareggio! Nessuno vince o perde fiches.\n";
         }
+        
+        
 
         if (fichesBanco > 0) {
          cout << "\nDesideri fare un'altra partita? (s/n): ";
          cin >> giocaAncora;
          cout << "\n";
-        } else {
-        cout << "Non è possibile giocare ancora, il banco e' a corto di fiches.\n";
-        break; 
+        } 
+        
+        if (fichesBanco <= 0) {
+            cout << "\nIl banco ha esaurito le fiches! Complimenti, hai vinto la partita.\n";
+        }
+        
+        if (fichesGiocatore <= 0) {
+            cout << "\nHai esaurito le fiches! Non puoi piu' giocare.\n";
+            break;
         }
         
         if (giocaAncora == 'n' || fichesBanco <= 0) {
@@ -230,5 +234,3 @@ int main() {
     cout << "Grazie per aver giocato! Alla prossima!\n";
     return 0;
 }
-
-
